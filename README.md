@@ -24,7 +24,7 @@ Execute the script to start the installation process:
 
 ./autoisetup.sh
 
-Follow any on-screen prompts to complete the setup. Confirm the Pink Screen by pressing Enter when prompted.
+Follow any on-screen prompts to complete the setup. Confirm the Pink Screen by pressing Enter if prompted.
 
 📘 Documentation
 For detailed instructions, troubleshooting, and more information about the Quilibrium Node, please refer to our comprehensive documentation.
