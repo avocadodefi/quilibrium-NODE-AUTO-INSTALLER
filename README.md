@@ -1,6 +1,6 @@
 ![Quilibrium Node Auto Installer](https://github.com/avocadodefi/quilibrium-NODE-AUTO-INSTALLER/blob/main/Node-Installer.gif)
 
-# Quilibrium Node Auto Installer
+# Quilibrium Node Auto Installer (Ubuntu 22.04)
 
 Welcome to the Quilibrium Node Auto Installer! This tool is crafted to provide a seamless and efficient setup experience for the Quilibrium Node environment. Whether you're a seasoned developer or just starting out, this script streamlines the process, saving you time and effort.
 
