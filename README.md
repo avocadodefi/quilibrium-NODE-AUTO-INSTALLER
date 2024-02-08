@@ -13,14 +13,14 @@ Getting started is as simple as 1-2-3. Follow these steps to set up your Quilibr
    ```bash
    wget https://raw.githubusercontent.com/avocadodefi/quilibrium-NODE-AUTO-INSTALLER/main/autoisetup.sh
 
-Make it Executable
+2. **Make it Executable**
 Change the script's permissions to make it executable:
-
+  ```bash
 chmod +x autoisetup.sh
 
-Launch the Installer
+3. **Launch the Installer**
 Execute the script to start the installation process:
-
+  ```bash
 ./autoisetup.sh
 
 Follow any on-screen prompts to complete the setup. Confirm the Pink Screen by pressing Enter when prompted.
