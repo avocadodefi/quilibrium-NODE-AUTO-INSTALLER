@@ -54,14 +54,24 @@ screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas
 # Start the wallet in a second screen session
 screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
 
-# Start the keys in a second screen session
-screen -dmS quilibrium_keys
+# Start the keys in a third screen session
+screen -dmS quilibrium_keys bash -c 'sleep 5 && exec bash'
+
+# Wait for a while to allow initialization
+sleep 10
+
 # Check for the existence of the keys.yml file
 keys_file="/root/ceremonyclient/node/.config/keys.yml"
+attempt=1
+max_attempts=5
+while [ ! -f "$keys_file" ] && [ $attempt -le $max_attempts ]; do
+    echo "Attempt $attempt: keys.yml file not found at $keys_file."
+    attempt=$((attempt + 1))
+    sleep 5
+done
+
 if [ -f "$keys_file" ]; then
     cat "$keys_file"
 else
-    echo "keys.yml file not found at $keys_file."
-    ls -al "/root/ceremonyclient/node/.config/"
+    echo "Failed to find keys.yml file after $max_attempts attempts."
 fi
-
