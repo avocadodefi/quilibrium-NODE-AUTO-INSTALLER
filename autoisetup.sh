@@ -58,16 +58,17 @@ screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=aren
 screen -dmS quilibrium_keys bash -c 'sleep 5 && exec bash'
 
 # Wait for a while to allow initialization
-sleep 10
+sleep 30  # Increased from 10 to 30 seconds
 
 # Check for the existence of the keys.yml file
-keys_file="/root/ceremonyclient/node/.config/keys.yml"
+keys_file="/root/ceremonyclient/node/config/keys.yml"  # Corrected path
 attempt=1
 max_attempts=5
 while [ ! -f "$keys_file" ] && [ $attempt -le $max_attempts ]; do
     echo "Attempt $attempt: keys.yml file not found at $keys_file."
+    ls -al "/root/ceremonyclient/node/config/"  # Debugging output
     attempt=$((attempt + 1))
-    sleep 5
+    sleep 10
 done
 
 if [ -f "$keys_file" ]; then
