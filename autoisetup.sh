@@ -55,7 +55,7 @@ screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas
 screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
 
 # Start the keys in a second screen session
-screen -keys
+screen -dmS quilibrium_keys
 # Check for the existence of the keys.yml file
 keys_file="/root/ceremonyclient/node/.config/keys.yml"
 if [ -f "$keys_file" ]; then
