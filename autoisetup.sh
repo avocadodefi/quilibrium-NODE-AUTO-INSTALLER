@@ -48,15 +48,6 @@ else
     git clone https://github.com/quilibriumnetwork/ceremonyclient || { echo "Failed to clone the repository. Exiting."; exit 1; }
 fi
 
-# Start the node in a screen session
-screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node && GOEXPERIMENT=arenas go run ./...; exec bash'
-
-# Start the wallet in a second screen session
-screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node && GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
-
-# Start the keys in a third screen session
-screen -dmS quilibrium_keys bash -c 'cd ceremonyclient/node && sleep 5 && exec bash'
-
 # Wait for a while to allow initialization
 sleep 30  # Increased from 10 to 30 seconds
 
