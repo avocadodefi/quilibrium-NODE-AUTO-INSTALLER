@@ -62,4 +62,3 @@ sleep 30  # Increased from 10 to 30 seconds
 
 # Check for the existence of the keys.yml file
 cat /root/ceremonyclient/node/.config/keys.yml
-fi
