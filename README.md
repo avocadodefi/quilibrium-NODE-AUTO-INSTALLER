@@ -17,13 +17,11 @@ Getting started is as simple as 1-2-3. Follow these steps to set up your Quilibr
 3. **Make it Executable**
 Change the script's permissions to make it executable:
 
-  ```bash
 chmod +x autoisetup.sh
 
 3. **Launch the Installer**
 Execute the script to start the installation process:
 
-  ```bash
 ./autoisetup.sh
 
 Follow any on-screen prompts to complete the setup. Confirm the Pink Screen by pressing Enter when prompted.
