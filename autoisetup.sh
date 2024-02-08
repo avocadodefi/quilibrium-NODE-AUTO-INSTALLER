@@ -1,21 +1,13 @@
 #!/bin/bash
 
-# Ensure the unattended-upgrades package is installed
-sudo apt-get install unattended-upgrades -y
-
 # Set DEBIAN_FRONTEND to noninteractive to avoid any prompts
 export DEBIAN_FRONTEND=noninteractive
 
-# Enable all automatic updates (optional, if you want all types of updates to be automatic)
-# sudo dpkg-reconfigure --priority=low unattended-upgrades
-
 # Update and Upgrade Ubuntu Packages without any prompts
-sudo apt-get update
-sudo apt-get upgrade -yq
-sudo apt-get dist-upgrade -yq
+sudo apt-get update && sudo apt-get -y -o Dpkg::Options::="--force-confnew" upgrade
 
 # Install wget, screen, and git without any prompts
-sudo apt-get install wget screen git -y
+sudo apt-get install -y wget screen git
 
 # Download Go
 wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
@@ -25,7 +17,7 @@ sudo tar -xvf go1.20.2.linux-amd64.tar.gz
 sudo mv go /usr/local
 
 # Install Golang without any prompts
-sudo apt-get install golang -y
+sudo apt-get install -y golang
 
 # Setting up environment variables
 export GOROOT=/usr/local/go
@@ -37,11 +29,16 @@ echo 'export GOROOT=/usr/local/go' >> $HOME/.profile
 echo 'export GOPATH=$HOME/Projects/Proj1' >> $HOME/.profile
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> $HOME/.profile
 
-# Clone the ceremonyclient repository if it does not exist
-if [ ! -d "ceremonyclient" ]; then
-    git clone https://github.com/quilibriumnetwork/ceremonyclient
+# Clone the ceremonyclient repository if it does not exist, or use the existing directory
+if [ -d "ceremonyclient" ]; then
+    echo "The 'ceremonyclient' directory already exists, using the existing directory."
 else
-    echo "The 'ceremonyclient' directory already exists, skipping cloning."
+    if git clone https://github.com/quilibriumnetwork/ceremonyclient; then
+        echo "Repository cloned successfully."
+    else
+        echo "Failed to clone the repository. Exiting."
+        exit 1
+    fi
 fi
 
 # Starting screen sessions and running commands
