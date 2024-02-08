@@ -60,9 +60,6 @@ screen -dmS quilibrium_keys bash -c 'sleep 5 && exec bash'
 # Wait for a while to allow initialization
 sleep 30  # Increased from 10 to 30 seconds
 
-# Start the keys in a second screen session
-screen -keys
-
-# Display the contents of the keys.yml file if it exists
-cat /root/ceremonyclient/node/.config/keys.yml || echo "keys.yml file not found."
+# Check for the existence of the keys.yml file
+cat /root/ceremonyclient/node/.config/keys.yml
 fi
