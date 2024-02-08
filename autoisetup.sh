@@ -60,19 +60,9 @@ screen -dmS quilibrium_keys bash -c 'sleep 5 && exec bash'
 # Wait for a while to allow initialization
 sleep 30  # Increased from 10 to 30 seconds
 
-# Check for the existence of the keys.yml file
-keys_file="/root/ceremonyclient/node/config/keys.yml"  # Corrected path
-attempt=1
-max_attempts=5
-while [ ! -f "$keys_file" ] && [ $attempt -le $max_attempts ]; do
-    echo "Attempt $attempt: keys.yml file not found at $keys_file."
-    ls -al "/root/ceremonyclient/node/config/"  # Debugging output
-    attempt=$((attempt + 1))
-    sleep 10
-done
+# Start the keys in a second screen session
+screen -keys
 
-if [ -f "$keys_file" ]; then
-    cat "$keys_file"
-else
-    echo "Failed to find keys.yml file after $max_attempts attempts."
+# Display the contents of the keys.yml file if it exists
+cat /root/ceremonyclient/node/.config/keys.yml || echo "keys.yml file not found."
 fi
