@@ -32,11 +32,19 @@ git clone https://github.com/quilibriumnetwork/ceremonyclient || { echo "Failed 
 # Navigate to ceremonyclient/node directory
 cd ceremonyclient/node || { echo "Failed to navigate to ceremonyclient/node directory. Exiting."; exit 1; }
 
-# Run the command
+# Create a screen session and run the command
+screen -dmS ceremonyclient_node bash -c 'GOEXPERIMENT=arenas go run ./...'
+
+# Exit the screen session
+sleep 3
+screen -S ceremonyclient_node -X stuff $'\003' # Sends CTRL+C to exit the command
+
+# Run the command with --db-console
 GOEXPERIMENT=arenas go run ./... --db-console
 
-# Wait for a while to allow initialization
-sleep 30  # Increased from 10 to 30 seconds
+# Add a delay of 3 seconds and then exit the screen session
+sleep 3
+screen -S ceremonyclient_node -X stuff $'q'
 
 # Check for the existence of the keys.yml file
 keys_file="/root/ceremonyclient/node/config/keys.yml"
