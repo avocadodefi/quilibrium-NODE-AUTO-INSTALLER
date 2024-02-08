@@ -54,12 +54,13 @@ screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas
 # Start the wallet in a second screen session
 screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
 
+# Check the current working directory
+echo "Current working directory: $(pwd)"
+
 # Check for the existence of the keys.yml file
 if [ -f "ceremonyclient/node/.config/keys.yml" ]; then
     cat "ceremonyclient/node/.config/keys.yml"
 else
-    echo "Current directory: $(pwd)"
-    ls -al ceremonyclient/node/.config/
     echo "keys.yml file not found."
 fi
 
