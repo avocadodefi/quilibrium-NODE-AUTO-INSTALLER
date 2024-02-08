@@ -7,3 +7,5 @@ chmod +x autoisetup.sh
 
 
 ./autoisetup.sh
+
+Confirm the Pink Screen with pressing enter (4x)
