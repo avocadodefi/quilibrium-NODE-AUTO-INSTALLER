@@ -16,9 +16,6 @@ wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
 sudo tar -xvf go1.20.2.linux-amd64.tar.gz
 sudo mv go /usr/local
 
-# Install Golang without any prompts
-sudo apt-get install -y golang
-
 # Setting up environment variables
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/Projects/Proj1
@@ -29,38 +26,18 @@ echo 'export GOROOT=/usr/local/go' >> $HOME/.profile
 echo 'export GOPATH=$HOME/Projects/Proj1' >> $HOME/.profile
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> $HOME/.profile
 
-# Clone the ceremonyclient repository if it does not exist, or use the existing directory
+# Clone the ceremonyclient repository if it does not exist
 if [ -d "ceremonyclient" ]; then
     echo "The 'ceremonyclient' directory already exists, using the existing directory."
 else
-    if git clone https://github.com/quilibriumnetwork/ceremonyclient; then
-        echo "Repository cloned successfully."
-    else
-        echo "Failed to clone the repository. Exiting."
-        exit 1
-    fi
+    git clone https://github.com/quilibriumnetwork/ceremonyclient || { echo "Failed to clone the repository. Exiting."; exit 1; }
 fi
 
-# Starting screen sessions and running commands
-sleep 2
-screen -dmS quilibrium
-sleep 1
-screen -S quilibrium -X stuff 'cd ceremonyclient/node\n'
-sleep 1
-screen -S quilibrium -X stuff 'GOEXPERIMENT=arenas go run ./...\n'
-sleep 5
-screen -S quilibrium -X stuff $'\003'
-sleep 1
-screen -S quilibrium -X stuff 'exit\n'
-sleep 1
-screen -S quilibrium -X stuff 'cd ceremonyclient/node\n'
-sleep 1
-screen -S quilibrium -X stuff 'GOEXPERIMENT=arenas go run ./... --db-console\n'
-sleep 5
-screen -S quilibrium -X stuff $'\003'
-sleep 1
-screen -S quilibrium -X stuff 'exit\n'
-sleep 1
+# Start the node in a screen session
+screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./...; exec bash'
+
+# Start the wallet in a second screen session
+screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
 
 # Check for the existence of the keys.yml file
 if [ -f "ceremonyclient/node/.config/keys.yml" ]; then
