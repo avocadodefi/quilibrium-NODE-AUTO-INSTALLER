@@ -20,6 +20,7 @@ Change the script's permissions to make it executable:
 chmod +x autoisetup.sh
 
 3. **Launch the Installer**
+
 Execute the script to start the installation process:
 
 ```bash
