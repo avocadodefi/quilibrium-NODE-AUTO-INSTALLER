@@ -53,16 +53,13 @@ screen -S quilibrium -X stuff $'\003'
 sleep 1
 screen -S quilibrium -X stuff 'exit\n'
 sleep 1
-
-screen -dmS quilibrium_wallet
+screen -S quilibrium -X stuff 'cd ceremonyclient/node\n'
 sleep 1
-screen -S quilibrium_wallet -X stuff 'cd ceremonyclient/node\n'
-sleep 1
-screen -S quilibrium_wallet -X stuff 'GOEXPERIMENT=arenas go run ./... --db-console\n'
+screen -S quilibrium -X stuff 'GOEXPERIMENT=arenas go run ./... --db-console\n'
 sleep 5
-screen -S quilibrium_wallet -X stuff $'\003'
+screen -S quilibrium -X stuff $'\003'
 sleep 1
-screen -S quilibrium_wallet -X stuff 'exit\n'
+screen -S quilibrium -X stuff 'exit\n'
 sleep 1
 
 # Check for the existence of the keys.yml file
