@@ -49,16 +49,21 @@ else
 fi
 
 # Start the node in a screen session
-screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./...; exec bash'
+screen -dmS quilibrium_node bash -c 'cd ceremonyclient/node && GOEXPERIMENT=arenas go run ./...; exec bash'
 
 # Start the wallet in a second screen session
-screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
+screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node && GOEXPERIMENT=arenas go run ./... --db-console; exec bash'
 
 # Start the keys in a third screen session
-screen -dmS quilibrium_keys bash -c 'sleep 5 && exec bash'
+screen -dmS quilibrium_keys bash -c 'cd ceremonyclient/node && sleep 5 && exec bash'
 
 # Wait for a while to allow initialization
 sleep 30  # Increased from 10 to 30 seconds
 
 # Check for the existence of the keys.yml file
-cat /root/ceremonyclient/node/.config/keys.yml
+keys_file="/root/ceremonyclient/node/config/keys.yml"
+if [ -f "$keys_file" ]; then
+    cat "$keys_file"
+else
+    echo "keys.yml file not found at $keys_file."
+fi
