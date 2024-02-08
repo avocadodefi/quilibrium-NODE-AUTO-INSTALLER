@@ -1,4 +1,4 @@
-![Quilibrium Node Auto Installer]([https://github.com/avocadodefi/quilibrium-NODE-AUTO-INSTALLER/blob/main/q1.png](https://github.com/avocadodefi/quilibrium-NODE-AUTO-INSTALLER/blob/main/Node-Installer.gif))
+![Quilibrium Node Auto Installer](https://github.com/avocadodefi/quilibrium-NODE-AUTO-INSTALLER/blob/main/Node-Installer.gif)
 
 # Quilibrium Node Auto Installer
 
