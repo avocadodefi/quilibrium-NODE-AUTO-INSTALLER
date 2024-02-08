@@ -2,12 +2,42 @@
 
 # Quilibrium Node Auto Installer
 
-This script is designed to quickly and effortlessly set up the Quilibrium Node environment on your system.
+Welcome to the Quilibrium Node Auto Installer! This tool is crafted to provide a seamless and efficient setup experience for the Quilibrium Node environment. Whether you're a seasoned developer or just starting out, this script streamlines the process, saving you time and effort.
 
-## Quick and Fast Guide
+## 🚀 Quick Start Guide
 
-To get started, follow these simple steps:
+Getting started is as simple as 1-2-3. Follow these steps to set up your Quilibrium Node:
 
-1. **Download the Installer Script**:
+1. **Download the Installer Script**
+   Grab the latest version of the auto installation script directly from the repository:
    ```bash
    wget https://raw.githubusercontent.com/avocadodefi/quilibrium-NODE-AUTO-INSTALLER/main/autoisetup.sh
+Make it Executable
+Change the script's permissions to make it executable:
+
+
+chmod +x autoisetup.sh
+Launch the Installer
+Execute the script to start the installation process:
+
+
+./autoisetup.sh
+Follow any on-screen prompts to complete the setup. Confirm the Pink Screen by pressing Enter when prompted.
+
+📘 Documentation
+For detailed instructions, troubleshooting, and more information about the Quilibrium Node, please refer to our comprehensive documentation.
+
+💬 Community and Support
+Join our vibrant community for support, discussions, and sharing best practices: https://twitter.com/eth2
+
+Community Forum
+https://twitter.com/eth2
+Your contributions make our project great! Check out our contributing guide for more information on how to get involved.
+
+⚖️ License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+🙏 Acknowledgments
+Big thanks to everyone who has contributed to this project!
+
+💡 For more information, updates, and news, visit our GitHub Repository.
