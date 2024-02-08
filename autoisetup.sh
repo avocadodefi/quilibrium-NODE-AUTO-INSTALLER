@@ -12,6 +12,12 @@ sudo apt-get install -y wget screen git
 # Download Go
 wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
 
+# Check if /usr/local/go already exists
+if [ -d "/usr/local/go" ]; then
+    echo "/usr/local/go already exists. Removing existing directory."
+    sudo rm -rf /usr/local/go
+fi
+
 # Extract Go and move to /usr/local
 sudo tar -xvf go1.20.2.linux-amd64.tar.gz
 sudo mv go /usr/local
@@ -26,9 +32,18 @@ echo 'export GOROOT=/usr/local/go' >> $HOME/.profile
 echo 'export GOPATH=$HOME/Projects/Proj1' >> $HOME/.profile
 echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> $HOME/.profile
 
-# Clone the ceremonyclient repository if it does not exist
+# Check if the ceremonyclient directory exists and is a Git repository
 if [ -d "ceremonyclient" ]; then
-    echo "The 'ceremonyclient' directory already exists, using the existing directory."
+    if [ -d "ceremonyclient/.git" ]; then
+        echo "The 'ceremonyclient' directory already exists and is a Git repository. Pulling the latest changes."
+        cd ceremonyclient
+        git pull
+        cd ..
+    else
+        echo "The 'ceremonyclient' directory already exists but is not a Git repository. Removing and cloning anew."
+        rm -rf ceremonyclient
+        git clone https://github.com/quilibriumnetwork/ceremonyclient
+    fi
 else
     git clone https://github.com/quilibriumnetwork/ceremonyclient || { echo "Failed to clone the repository. Exiting."; exit 1; }
 fi
