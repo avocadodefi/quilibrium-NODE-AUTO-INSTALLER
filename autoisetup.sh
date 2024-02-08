@@ -58,6 +58,8 @@ screen -dmS quilibrium_wallet bash -c 'cd ceremonyclient/node; GOEXPERIMENT=aren
 if [ -f "ceremonyclient/node/.config/keys.yml" ]; then
     cat "ceremonyclient/node/.config/keys.yml"
 else
+    echo "Current directory: $(pwd)"
+    ls -al ceremonyclient/node/.config/
     echo "keys.yml file not found."
 fi
 
