@@ -6,8 +6,8 @@ export DEBIAN_FRONTEND=noninteractive
 # Update and Upgrade Ubuntu Packages without any prompts
 sudo apt-get update && sudo apt-get -y upgrade
 
-# Install wget and screen without any prompts
-sudo apt-get install -y wget screen
+# Install wget, screen, and git without any prompts
+sudo apt-get install -y wget screen git
 
 # Download Go
 wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
@@ -40,21 +40,27 @@ else
 fi
 
 # Starting first screen session, running commands, and then exiting
-screen -dmS quilibrium bash -c '
-    cd ceremonyclient/node
-    GOEXPERIMENT=arenas go run ./...
-    exec bash'
-sleep 5 # Wait for the command to start
+screen -dmS quilibrium
+screen -S quilibrium -X stuff $'cd ceremonyclient/node\n'
+screen -S quilibrium -X stuff $'GOEXPERIMENT=arenas go run ./...\n'
+sleep 10 # Adjust this sleep time as necessary
+screen -S quilibrium -X stuff $'\003' # Send Ctrl+C to stop the command
 screen -S quilibrium -X stuff $'exit\n'
 
 # Starting second screen session, running commands, and then exiting
-screen -dmS quilibrium_wallet bash -c '
-    cd ceremonyclient/node
-    GOEXPERIMENT=arenas go run ./... --db-console
-    exec bash'
-sleep 5 # Wait for the command to start
+screen -dmS quilibrium_wallet
+screen -S quilibrium_wallet -X stuff $'cd ceremonyclient/node\n'
+screen -S quilibrium_wallet -X stuff $'GOEXPERIMENT=arenas go run ./... --db-console\n'
+sleep 10 # Adjust this sleep time as necessary
+screen -S quilibrium_wallet -X stuff $'\003' # Send Ctrl+C to stop the command
 screen -S quilibrium_wallet -X stuff $'exit\n'
 
-# Output keys.yml content (after a delay to allow previous commands to complete)
-sleep 10
-cat ceremonyclient/node/.config/keys.yml
+# Wait for the .config/keys.yml file to be created
+sleep 30 # Adjust this sleep time as necessary
+
+# Output keys.yml content
+if [ -f ceremonyclient/node/.config/keys.yml ]; then
+    cat ceremonyclient/node/.config/keys.yml
+else
+    echo "keys.yml file not found."
+fi
