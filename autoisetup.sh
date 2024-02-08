@@ -60,3 +60,4 @@ if [ -f "ceremonyclient/node/.config/keys.yml" ]; then
 else
     echo "keys.yml file not found."
 fi
+
