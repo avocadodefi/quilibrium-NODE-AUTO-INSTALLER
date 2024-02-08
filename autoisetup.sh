@@ -42,6 +42,7 @@ else
 fi
 
 # Starting screen sessions and running commands
+sleep 2
 screen -dmS quilibrium
 sleep 1
 screen -S quilibrium -X stuff 'cd ceremonyclient/node\n'
